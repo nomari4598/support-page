@@ -1,11 +1,6 @@
 <style>
-  /* !important を追加して強制的に非表示にします */
-  h1.project-name { 
-    display: none !important; 
-  }
-  
-  /* もし上記でも消えない場合、ヘッダー全体を消すこちらも試してください */
-  .page-header {
+  /* ページに登場する「一番最初のh1タグ」を非表示にします */
+  h1:first-of-type {
     display: none !important;
   }
 </style>
