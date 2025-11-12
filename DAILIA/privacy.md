@@ -1,3 +1,10 @@
+<style>
+  /* ページに登場する「一番最初のh1タグ」を非表示にします */
+  h1:first-of-type {
+    display: none !important;
+  }
+</style>
+
 # プライバシーポリシー
 
 ## 第1条（個人情報の定義）
