@@ -1,5 +1,13 @@
 <style>
-  h1.project-name { display: none; }
+  /* !important を追加して強制的に非表示にします */
+  h1.project-name { 
+    display: none !important; 
+  }
+  
+  /* もし上記でも消えない場合、ヘッダー全体を消すこちらも試してください */
+  .page-header {
+    display: none !important;
+  }
 </style>
 
 # 利用規約
