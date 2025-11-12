@@ -1,3 +1,7 @@
+<style>
+  h1.project-name { display: none; }
+</style>
+
 # 利用規約
 
 ## 第1条（適用）
