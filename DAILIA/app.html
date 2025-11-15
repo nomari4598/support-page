@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DAILIA</title>
+  
+  <style>
+    /* 基本リセット */
+    body, h1, h2, h3, p, ul {
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      line-height: 1.6;
+      background-color: #f4f4f4;
+      color: #333;
+    }
+    /* コンテンツ全体を中央に寄せる */
+    .container {
+      max-width: 800px;
+      margin: 20px auto;
+      padding: 20px;
+      background-color: #ffffff;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    
+    /* ヘッダー（アプリアイコンと名前） */
+    header {
+      text-align: center;
+      margin-bottom: 40px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid #eee;
+    }
+    header img.app-icon {
+      width: 100px;
+      height: 100px;
+      border-radius: 22px; /* App Store風の角丸 */
+      margin-bottom: 15px;
+    }
+    header h1 {
+      font-size: 2.5em;
+    }
+    header p.catchphrase {
+      font-size: 1.2em;
+      color: #555;
+    }
+    
+    /* App Store バッジ (リリース後にリンクを設定) */
+    .app-store-badge {
+      display: inline-block;
+      margin-top: 20px;
+      width: 160px; /* バッジ画像のサイズに合わせて調整 */
+    }
+
+    /* 機能紹介セクション */
+    main h2 {
+      font-size: 1.8em;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+    .feature {
+      margin-bottom: 30px;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+    .feature img {
+      width: 200px; /* スクリーンショットのサイズ */
+      border-radius: 8px;
+      border: 1px solid #ddd;
+    }
+    .feature-description h3 {
+      font-size: 1.4em;
+      margin-bottom: 5px;
+    }
+
+    /* フッター */
+    footer {
+      text-align: center;
+      margin-top: 40px;
+      padding-top: 20px;
+      border-top: 1px solid #eee;
+      color: #888;
+    }
+    footer ul {
+      list-style: none;
+      margin-bottom: 15px;
+    }
+    footer ul li {
+      display: inline-block;
+      margin: 0 10px;
+    }
+    footer ul li a {
+      color: #007aff; /* Apple風のリンク色 */
+      text-decoration: none;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+
+    <header>
+      <img src="icon.png" alt="アプリアイコン" class="app-icon">
+      
+      <h1>DAILIA</h1>
+      <p class="catchphrase">#頑張らないSNS</p>
+
+      </header>
+
+    <main>
+      <h2>主な機能</h2>
+      
+      <section class="feature">
+        <img src="feature1.png" alt="機能1のスクリーンショット">
+        <div class="feature-description">
+          <h3>機能1のタイトル</h3>
+          <p>あなたの「今日」が誰かの「共感」に</p>
+        </div>
+      </section>
+      
+      <section class="feature">
+        <img src="feature2.png" alt="機能2のスクリーンショット">
+        <div class="feature-description">
+          <h3>機能2のタイトル</h3>
+          <p>誰かの日記にそっと「共感」を送ることもできます</p>
+        </div>
+      </section>
+
+      <section class="feature">
+        <img src="feature3.png" alt="機能3のスクリーンショット">
+        <div class="feature-description">
+          <h3>機能2のタイトル</h3>
+          <p>1日1投稿だから気負わずに</p>
+        </div>
+      </section>
+
+    </main>
+
+    <footer>
+      <ul>
+        <li>
+          <a href="mailto:dailia.app.contact@gmail.com">サポート / お問い合わせ</a>
+        </li>
+        <li>
+          <a href="https://nomari4598.github.io/support-page/DAILIA/privacy.html">プライバシーポリシー</a>
+        </li>
+      </ul>
+      <p>&copy; 2025 nomari</p>
+    </footer>
+
+  </div>
+</body>
+</html>
