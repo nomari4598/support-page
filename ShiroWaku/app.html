@@ -3,525 +3,678 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>ShiroWaku - レトロカメラアプリ</title>
+    <title>ShiroWaku - インスタントフレームカメラアプリ</title>
     <style>
       * {
+        box-sizing: border-box;
         margin: 0;
         padding: 0;
-        box-sizing: border-box;
       }
-
+      html {
+        scroll-behavior: smooth;
+      }
       body {
-        font-family:
-          -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-          "Helvetica Neue", Arial, sans-serif;
-        color: #1a1a1a;
-        background: linear-gradient(135deg, #f5f5f5 0%, #ffffff 100%);
+        background:
+          radial-gradient(
+            circle at 12% 8%,
+            rgba(255, 255, 255, 0.9),
+            transparent 34%
+          ),
+          linear-gradient(180deg, #fefce8 0%, #fff7ed 48%, #f8fafc 100%);
+        color: #26221c;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        line-height: 1.8;
         overflow-x: hidden;
       }
-
-      /* ヘッダー */
-      header {
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        color: white;
-        padding: 60px 20px;
-        text-align: center;
-        box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+      a {
+        color: inherit;
+        text-decoration: none;
       }
-
-      header h1 {
-        font-size: 3.5rem;
-        margin-bottom: 10px;
-        font-weight: 800;
-        text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+      .page {
+        margin: 0 auto;
+        max-width: 1040px;
+        padding: 24px;
       }
-
-      header p {
-        font-size: 1.3rem;
-        opacity: 0.95;
-        font-weight: 300;
-      }
-
-      /* ナビゲーション */
-      nav {
-        background: white;
-        padding: 20px 0;
+      .nav {
+        align-items: center;
+        backdrop-filter: blur(18px);
+        background: rgba(255, 255, 255, 0.72);
+        border: 1px solid rgba(120, 113, 108, 0.14);
+        border-radius: 999px;
+        box-shadow: 0 18px 50px rgba(120, 113, 108, 0.12);
+        display: flex;
+        gap: 20px;
+        justify-content: space-between;
+        margin: 0 auto 28px;
+        max-width: 880px;
+        padding: 12px 18px;
         position: sticky;
-        top: 0;
-        z-index: 100;
-        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        top: 16px;
+        z-index: 10;
       }
-
-      nav ul {
+      .brand {
+        align-items: center;
+        display: flex;
+        font-weight: 800;
+        gap: 8px;
+        letter-spacing: 0;
+      }
+      .nav-links {
+        display: flex;
+        gap: 10px;
         list-style: none;
+      }
+      .nav-links a {
+        border-radius: 999px;
+        color: #57534e;
+        font-size: 0.92rem;
+        font-weight: 700;
+        padding: 8px 14px;
+      }
+      .nav-links a:hover {
+        background: #fef3c7;
+        color: #1c1917;
+      }
+      .hero,
+      .section {
+        margin: 0 auto;
+        max-width: 920px;
+      }
+      .hero {
+        align-items: center;
+        display: grid;
+        gap: 40px;
+        grid-template-columns: 1fr;
+        min-height: calc(100vh - 116px);
+        padding: 44px 0 76px;
+        text-align: center;
+      }
+      .eyebrow {
+        color: #a16207;
+        font-size: 0.82rem;
+        font-weight: 800;
+        letter-spacing: 0.14em;
+        margin-bottom: 16px;
+        text-transform: uppercase;
+      }
+      h1 {
+        font-size: clamp(2.7rem, 8vw, 5.9rem);
+        font-weight: 900;
+        letter-spacing: 0;
+        line-height: 0.95;
+        margin-bottom: 24px;
+      }
+      .hero-title-line {
+        display: block;
+      }
+      .hero-title-line-offset {
+        transform: translateX(0.4em);
+      }
+      .lead {
+        color: #57534e;
+        font-size: clamp(1rem, 2vw, 1.18rem);
+        margin: 0 auto;
+        max-width: 560px;
+      }
+      .hero-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 14px;
+        justify-content: center;
+        margin-top: 34px;
+      }
+      .hero-store {
         display: flex;
         justify-content: center;
-        gap: 30px;
-        max-width: 1200px;
-        margin: 0 auto;
-        padding: 0 20px;
-        flex-wrap: wrap;
+        margin-top: 34px;
       }
-
-      nav a {
-        text-decoration: none;
-        color: #667eea;
-        font-weight: 600;
-        transition: color 0.3s;
+      .hero-actions-secondary {
+        margin-top: 16px;
       }
-
-      nav a:hover {
-        color: #764ba2;
-      }
-
-      /* コンテナ */
-      .container {
-        max-width: 1200px;
-        margin: 0 auto;
-        padding: 0 20px;
-      }
-
-      /* セクション */
-      section {
-        padding: 80px 20px;
-      }
-
-      section h2 {
-        font-size: 2.5rem;
-        margin-bottom: 30px;
-        text-align: center;
-        color: #667eea;
-      }
-
-      /* ヒーロー */
-      .hero {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 60px;
+      .btn {
         align-items: center;
-        padding: 60px 20px;
+        background: #1c1917;
+        border-radius: 999px;
+        box-shadow: 0 18px 35px rgba(28, 25, 23, 0.18);
+        color: #fff;
+        display: inline-flex;
+        font-weight: 800;
+        justify-content: center;
+        min-height: 52px;
+        padding: 0 24px;
       }
-
-      .hero-content h3 {
-        font-size: 2rem;
-        margin-bottom: 20px;
-        color: #1a1a1a;
+      .btn-sub {
+        background: #ffffff;
+        box-shadow: none;
+        color: #44403c;
       }
-
-      .hero-content p {
-        font-size: 1.1rem;
-        line-height: 1.8;
-        color: #555;
-        margin-bottom: 20px;
+      .btn-store {
+        background: transparent;
+        border: 0;
+        box-shadow: none;
+        min-height: auto;
+        padding: 0;
       }
-
-      .hero-image {
+      .btn-store img {
+        display: block;
+        height: 52px;
+        width: auto;
+      }
+      .hero-visual {
+        margin: 0 auto;
+        max-width: 860px;
+        width: 100%;
+      }
+      .image-zoom-button {
+        background: transparent;
+        border: 0;
+        cursor: zoom-in;
+        display: block;
+        padding: 0;
+        width: 100%;
+      }
+      .hero-visual img {
+        border-radius: 22px;
+        box-shadow: 0 28px 70px rgba(120, 113, 108, 0.16);
+        display: block;
+        height: auto;
+        width: 100%;
+      }
+      .image-modal {
+        align-items: center;
+        background: rgba(28, 25, 23, 0.78);
+        display: none;
+        inset: 0;
+        justify-content: center;
+        padding: 24px;
+        position: fixed;
+        z-index: 100;
+      }
+      .image-modal.is-open {
+        display: flex;
+      }
+      .image-modal img {
+        border-radius: 24px;
+        box-shadow: 0 30px 90px rgba(0, 0, 0, 0.35);
+        max-height: 94vh;
+        max-width: min(1440px, 96vw);
+        width: auto;
+      }
+      .image-modal-close {
+        align-items: center;
+        background: rgba(255, 255, 255, 0.9);
+        border: 0;
+        border-radius: 999px;
+        color: #1c1917;
+        cursor: pointer;
+        display: inline-flex;
+        font-size: 1.4rem;
+        font-weight: 800;
+        height: 44px;
+        justify-content: center;
+        position: absolute;
+        right: 24px;
+        top: 24px;
+        width: 44px;
+      }
+      .section {
+        padding: 64px 0;
+        scroll-margin-top: 132px;
+      }
+      .section-title {
+        font-size: clamp(2rem, 5vw, 3.4rem);
+        font-weight: 900;
+        letter-spacing: 0;
+        line-height: 1;
+        margin-bottom: 28px;
         text-align: center;
       }
-
-      .hero-image img {
-        max-width: 100%;
-        height: auto;
-        border-radius: 20px;
-        box-shadow: 0 20px 60px rgba(102, 126, 234, 0.2);
-        transition: transform 0.3s;
+      .section-copy {
+        color: #57534e;
+        margin: 0 auto 34px;
+        max-width: 560px;
+        text-align: center;
       }
-
-      .hero-image img:hover {
-        transform: scale(1.05);
-      }
-
-      /* フィーチャーグリッド */
       .features {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-        gap: 30px;
-        margin-top: 50px;
+        gap: 18px;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
       }
-
       .feature-card {
-        background: white;
-        padding: 30px;
-        border-radius: 15px;
-        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
-        transition:
-          transform 0.3s,
-          box-shadow 0.3s;
+        background: rgba(255, 255, 255, 0.72);
+        border: 1px solid rgba(120, 113, 108, 0.13);
+        border-radius: 24px;
+        box-shadow: 0 18px 48px rgba(120, 113, 108, 0.1);
+        min-height: 190px;
+        padding: 28px;
       }
-
-      .feature-card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 15px 40px rgba(102, 126, 234, 0.15);
+      .feature-card h3,
+      .about-panel h3 {
+        color: #1c1917;
+        font-size: 1.15rem;
+        line-height: 1.5;
+        margin-bottom: 12px;
       }
-
-      .feature-card h4 {
-        font-size: 1.3rem;
-        margin-bottom: 15px;
-        color: #667eea;
+      .feature-card p,
+      .contact p {
+        color: #57534e;
       }
-
-      .feature-card p {
-        color: #666;
-        line-height: 1.6;
-        font-size: 0.95rem;
-      }
-
-      /* テクノロジースタック */
-      .tech-stack {
-        background: white;
-        padding: 40px;
-        border-radius: 15px;
-        margin-top: 50px;
-      }
-
-      .tech-stack h3 {
-        font-size: 1.5rem;
-        margin-bottom: 25px;
-        color: #667eea;
-      }
-
-      .tech-list {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-        gap: 20px;
-      }
-
-      .tech-item {
-        display: flex;
+      .about-grid {
         align-items: center;
-        gap: 10px;
-        padding: 15px;
-        background: #f9f9f9;
-        border-left: 4px solid #667eea;
-        border-radius: 8px;
+        display: grid;
+        gap: 34px;
+        grid-template-columns: 0.82fr 1fr;
       }
-
-      .tech-item strong {
-        color: #667eea;
+      .icon-frame {
+        margin: 0 auto;
+        max-width: 240px;
       }
-
-      /* アイコン表示 */
-      .app-icon {
-        max-width: 150px;
-        height: auto;
-        border-radius: 35px;
-        box-shadow: 0 10px 30px rgba(102, 126, 234, 0.2);
-        margin: 0 auto 20px;
+      .icon-frame img {
+        border-radius: 32px;
+        box-shadow: 0 26px 60px rgba(120, 113, 108, 0.14);
+        display: block;
+        width: 100%;
       }
-
-      /* ボタンスタイル */
-      .btn {
-        display: inline-block;
-        padding: 14px 40px;
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        color: white;
-        text-decoration: none;
-        border-radius: 8px;
-        font-weight: 600;
-        transition:
-          transform 0.3s,
-          box-shadow 0.3s;
-        border: none;
-        cursor: pointer;
-        font-size: 1rem;
+      .about-panel {
+        background: rgba(255, 255, 255, 0.66);
+        border: 1px solid rgba(120, 113, 108, 0.13);
+        border-radius: 26px;
+        padding: 30px;
       }
-
-      .btn:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
+      .about-store {
+        display: inline-flex;
+        margin-top: 24px;
       }
-
-      .btn-secondary {
-        background: white;
-        color: #667eea;
-        border: 2px solid #667eea;
+      .check-list {
+        color: #57534e;
+        display: grid;
+        gap: 14px;
+        list-style: none;
       }
-
-      .btn-secondary:hover {
-        background: #667eea;
-        color: white;
+      .check-list li {
+        align-items: flex-start;
+        display: flex;
+        gap: 12px;
       }
-
-      /* フッター */
-      footer {
-        background: #1a1a1a;
-        color: white;
-        padding: 40px 20px;
+      .check-list li::before {
+        color: #d97706;
+        content: "✓";
+        font-weight: 900;
+      }
+      .contact {
+        background: #1c1917;
+        border-radius: 30px;
+        box-shadow: 0 28px 70px rgba(28, 25, 23, 0.16);
+        color: #fff;
+        margin-bottom: 34px;
+        padding: 46px 28px;
         text-align: center;
       }
-
-      footer p {
-        margin-bottom: 15px;
-        opacity: 0.8;
+      .contact .section-copy {
+        color: rgba(255, 255, 255, 0.72);
       }
-
-      .footer-links {
+      .contact-actions {
         display: flex;
-        justify-content: center;
-        gap: 20px;
         flex-wrap: wrap;
-        margin-top: 20px;
+        gap: 14px;
+        justify-content: center;
+        margin-top: 24px;
       }
-
-      .footer-links a {
-        color: #667eea;
-        text-decoration: none;
-        transition: color 0.3s;
+      footer {
+        color: #78716c;
+        font-size: 0.9rem;
+        padding: 16px 0 34px;
+        text-align: center;
       }
-
-      .footer-links a:hover {
-        color: #fff;
-      }
-
-      /* レスポンシブ */
-      @media (max-width: 768px) {
-        header h1 {
-          font-size: 2.2rem;
+      @media (max-width: 760px) {
+        .page {
+          padding: 14px;
         }
-
-        header p {
-          font-size: 1rem;
+        .nav {
+          align-items: center;
+          border-radius: 24px;
+          flex-direction: row;
+          gap: 12px;
+          padding: 12px 14px;
+          top: 10px;
         }
-
-        .hero {
+        .brand {
+          flex-shrink: 0;
+          font-size: 1.02rem;
+        }
+        .nav-links {
+          flex: 1;
+          gap: 8px;
+          justify-content: flex-end;
+        }
+        .nav-links a {
+          display: flex;
+          font-size: 0.85rem;
+          justify-content: center;
+          padding: 8px 10px;
+          text-align: center;
+          white-space: nowrap;
+        }
+        .hero,
+        .about-grid {
           grid-template-columns: 1fr;
-          gap: 30px;
-          padding: 40px 20px;
         }
-
-        .hero-content h3 {
-          font-size: 1.5rem;
+        .hero {
+          gap: 28px;
+          min-height: auto;
+          padding: 28px 0 48px;
         }
-
-        section {
-          padding: 50px 20px;
+        .eyebrow {
+          font-size: 0.72rem;
+          letter-spacing: 0.12em;
         }
-
-        section h2 {
-          font-size: 1.8rem;
+        h1 {
+          font-size: clamp(2.1rem, 10.8vw, 3.3rem);
+          line-height: 0.98;
+          margin-bottom: 18px;
         }
-
-        nav ul {
-          gap: 15px;
+        .hero-title-line {
+          white-space: nowrap;
         }
-
-        nav a {
-          font-size: 0.9rem;
+        .hero-title-line-offset {
+          transform: translateX(0.3em);
+        }
+        .lead {
+          font-size: 0.98rem;
+          line-height: 1.9;
+        }
+        .hero-store {
+          margin-top: 28px;
+        }
+        .hero-actions {
+          gap: 12px;
+          margin-top: 14px;
+        }
+        .btn {
+          min-height: 50px;
+          padding: 0 20px;
+        }
+        .btn-store img {
+          height: 48px;
+        }
+        .image-zoom-button {
+          cursor: default;
+        }
+        .hero-visual img {
+          border-radius: 18px;
+        }
+        .features {
+          grid-template-columns: 1fr;
+        }
+        .feature-card {
+          min-height: auto;
+          padding: 24px;
+        }
+        .section-title {
+          font-size: clamp(2rem, 11vw, 3rem);
+          margin-bottom: 20px;
+        }
+        .section-copy {
+          font-size: 0.98rem;
+        }
+        .about-panel {
+          padding: 24px;
+        }
+        .about-store {
+          justify-content: center;
+          width: 100%;
+        }
+        .contact {
+          border-radius: 24px;
+          padding: 36px 20px;
+        }
+        .section {
+          padding: 48px 0;
+          scroll-margin-top: 108px;
         }
       }
-
-      /* スクロールアニメーション */
-      @keyframes fadeInUp {
-        from {
-          opacity: 0;
-          transform: translateY(30px);
+      @media (max-width: 420px) {
+        .nav {
+          gap: 8px;
+          padding: 10px 12px;
         }
-        to {
-          opacity: 1;
-          transform: translateY(0);
+        .brand {
+          font-size: 0.96rem;
         }
-      }
-
-      section {
-        animation: fadeInUp 0.6s ease-out;
+        .nav-links {
+          gap: 4px;
+        }
+        .nav-links a {
+          font-size: 0.76rem;
+          padding: 8px 6px;
+        }
+        .contact {
+          padding: 30px 14px;
+        }
+        .contact .section-title {
+          font-size: clamp(1.8rem, 10vw, 2.5rem);
+          line-height: 1.08;
+          margin-bottom: 16px;
+        }
+        .contact .section-copy {
+          font-size: 0.92rem;
+          line-height: 1.75;
+          margin-bottom: 0;
+          max-width: 19rem;
+        }
+        .contact-actions {
+          gap: 12px;
+          margin-top: 18px;
+        }
+        .contact-actions {
+          flex-direction: column;
+        }
+        .contact-actions .btn {
+          margin: 0 auto;
+          max-width: 18rem;
+          width: 100%;
+        }
       }
     </style>
   </head>
   <body>
-    <!-- ヘッダー -->
-    <header>
-      <h1>📸 ShiroWaku</h1>
-      <p>レトロ風フレームで思い出を残す</p>
-    </header>
-
-    <!-- ナビゲーション -->
-    <nav>
-      <ul>
-        <li><a href="#features">機能</a></li>
-        <li><a href="#about">アプリについて</a></li>
-        <li><a href="#contact">お問い合わせ</a></li>
-      </ul>
-    </nav>
-
-    <!-- ヒーロー -->
-    <section class="hero">
-      <div class="hero-content">
-        <h3>思い出を、自分らしく記録する</h3>
-        <p>
-          ShiroWakuは、レトロフレームで写真を撮影・保存できるiOSアプリです。コメント、日時、場所情報を付加して、あなただけの特別な思い出を作ることができます。
-        </p>
-        <p>
-          白余白付きのクラシックなフレームで、懐かしくて新しい写真体験をお楽しみください。
-        </p>
-        <div style="margin-top: 30px">
-          <a href="#features" class="btn">詳しく見る</a>
-        </div>
-      </div>
-      <div class="hero-image">
-        <img src="./images/image.png" alt="ShiroWakuのプレビュー画像" />
-      </div>
-    </section>
-
-    <!-- 機能セクション -->
-    <section id="features" class="container">
-      <h2>主な機能</h2>
-      <div class="features">
-        <div class="feature-card">
-          <h4>🎥 複数フレームスタイル</h4>
-          <p>
-            様々な対比のレトロフレームから選択できます。それぞれのスタイルが独特の雰囲気を演出します。
-          </p>
-        </div>
-        <div class="feature-card">
-          <h4>✏️ カスタマイズ機能</h4>
-          <p>
-            撮影後のプレビュー画面でコメント、日時、場所情報を自由に編集できます。あなたらしくカスタマイズしましょう。
-          </p>
-        </div>
-        <div class="feature-card">
-          <h4>📷 高品質保存</h4>
-          <p>
-            撮影したフレーム付き写真をアプリに直接保存。いつでも振り返ることができます。
-          </p>
-        </div>
-        <div class="feature-card">
-          <h4>🖼️ ギャラリー機能</h4>
-          <p>
-            撮影済みの写真をギャラリー画面で一覧表示。思い出をいつでも見返せます。
-          </p>
-        </div>
-        <div class="feature-card">
-          <h4>📱 iOS対応</h4>
-          <p>
-            iOSデバイスで最適化された使いやすいインターフェース。スムーズな操作感を実現しています。
-          </p>
-        </div>
-      </div>
-    </section>
-
-    <!-- アプリ情報セクション -->
-    <section id="about" class="container">
-      <h2>アプリについて</h2>
-      <div
-        style="
-          display: grid;
-          grid-template-columns: 1fr 1fr;
-          gap: 50px;
-          align-items: center;
-          margin-top: 50px;
-        "
-      >
+    <div class="page">
+      <nav class="nav" aria-label="メインナビゲーション">
+        <a class="brand" href="#">ShiroWaku</a>
+        <ul class="nav-links">
+          <li><a href="#features">機能</a></li>
+          <li><a href="#about">アプリについて</a></li>
+          <li><a href="#contact">お問い合わせ</a></li>
+        </ul>
+      </nav>
+      <header class="hero">
         <div>
-          <img
-            src="./images/icon.png"
-            alt="ShiroWakuアイコン"
-            class="app-icon"
-          />
+          <p class="eyebrow">Instant frame camera for iOS</p>
+          <h1>
+            <span class="hero-title-line">白い余白に</span>
+            <span class="hero-title-line hero-title-line-offset"
+              >思い出を残す。</span
+            >
+          </h1>
+          <p class="lead">
+            ShiroWakuは、インスタントフレームで<br />写真を撮影・保存できるiOSアプリです。<br />メッセージ、日時を添えて、<br />日常を自分らしい一枚で残せます。
+          </p>
+          <div class="hero-store">
+            <a
+              class="btn btn-store"
+              href="https://apps.apple.com/jp/app/shirowaku/id6776296654"
+              target="_blank"
+              rel="noreferrer"
+              aria-label="App StoreでShiroWakuをダウンロード"
+              ><img
+                src="./images/download_apple.svg"
+                alt="App Storeからダウンロード"
+            /></a>
+          </div>
+          <div class="hero-actions hero-actions-secondary">
+            <a class="btn" href="#features">機能を見る</a>
+            <a class="btn btn-sub" href="#contact">問い合わせる</a>
+          </div>
         </div>
-        <div>
-          <h3 style="font-size: 1.5rem; margin-bottom: 20px; color: #667eea">
-            ShiroWakuの特徴
-          </h3>
-          <ul style="list-style: none; color: #555">
-            <li
-              style="
-                padding: 12px 0;
-                border-bottom: 1px solid #eee;
-                display: flex;
-                align-items: center;
-              "
-            >
-              <span
-                style="color: #667eea; margin-right: 15px; font-size: 1.3rem"
-                >✓</span
-              >
-              <span>レトロ風フレームで懐かしい写真体験</span>
-            </li>
-            <li
-              style="
-                padding: 12px 0;
-                border-bottom: 1px solid #eee;
-                display: flex;
-                align-items: center;
-              "
-            >
-              <span
-                style="color: #667eea; margin-right: 15px; font-size: 1.3rem"
-                >✓</span
-              >
-              <span>複数のスタイルから自分好みを選択</span>
-            </li>
-            <li
-              style="
-                padding: 12px 0;
-                border-bottom: 1px solid #eee;
-                display: flex;
-                align-items: center;
-              "
-            >
-              <span
-                style="color: #667eea; margin-right: 15px; font-size: 1.3rem"
-                >✓</span
-              >
-              <span>コメント・日時・位置情報の記録</span>
-            </li>
-            <li
-              style="
-                padding: 12px 0;
-                border-bottom: 1px solid #eee;
-                display: flex;
-                align-items: center;
-              "
-            >
-              <span
-                style="color: #667eea; margin-right: 15px; font-size: 1.3rem"
-                >✓</span
-              >
-              <span>高速でスムーズな操作感</span>
-            </li>
-            <li style="padding: 12px 0; display: flex; align-items: center">
-              <span
-                style="color: #667eea; margin-right: 15px; font-size: 1.3rem"
-                >✓</span
-              >
-              <span>プライバシー重視の設計</span>
-            </li>
-          </ul>
+        <div class="hero-visual">
+          <button
+            class="image-zoom-button"
+            type="button"
+            aria-label="ShiroWakuのプレビュー画像を拡大表示"
+            data-image-open
+          >
+            <img src="./images/image.png" alt="ShiroWakuのプレビュー画像" />
+          </button>
         </div>
-      </div>
-    </section>
+      </header>
 
-    <!-- お問い合わせセクション -->
-    <section id="contact" class="container" style="text-align: center">
-      <h2>ご質問・ご要望</h2>
-      <p
-        style="
-          color: #666;
-          font-size: 1.1rem;
-          margin: 30px 0;
-          max-width: 600px;
-          margin-left: auto;
-          margin-right: auto;
-        "
+      <main>
+        <section id="features" class="section">
+          <h2 class="section-title">主な機能</h2>
+          <p class="section-copy">インスタントなメディア体験を、軽やかに。</p>
+          <div class="features">
+            <article class="feature-card">
+              <h3>🎥 複数のフレームスタイル</h3>
+              <p>
+                様々な対比のレトロフレームから選択可能。<br />それぞれのスタイルが独特の雰囲気を演出します。
+              </p>
+            </article>
+            <article class="feature-card">
+              <h3>✏️ カスタマイズ機能</h3>
+              <p>撮影後のプレビュー画面でコメントを自由に編集できます。</p>
+            </article>
+            <article class="feature-card">
+              <h3>📷 高品質保存</h3>
+              <p>
+                撮影した写真や動画をスマホに直接保存。<br />いつでも振り返ることができます。
+              </p>
+            </article>
+            <article class="feature-card">
+              <h3>🖼️ ギャラリー機能</h3>
+              <p>
+                撮影済みの写真や動画をギャラリー画面で一覧表示。<br />思い出をいつでも見返せます。
+              </p>
+            </article>
+          </div>
+        </section>
+
+        <section id="about" class="section">
+          <h2 class="section-title">アプリについて</h2>
+          <div class="about-grid">
+            <div class="icon-frame">
+              <img src="./images/icon.png" alt="ShiroWakuアイコン" />
+            </div>
+            <div class="about-panel">
+              <h3>ShiroWakuの特徴</h3>
+              <ul class="check-list">
+                <li>インスタントフレームで懐かしい写真体験</li>
+                <li>複数のスタイルから自分好みを選択</li>
+                <li>コメント・日時の記録</li>
+                <li>高速でスムーズな操作感</li>
+                <li>プライバシー重視の設計</li>
+              </ul>
+              <a
+                class="btn btn-store about-store"
+                href="https://apps.apple.com/jp/app/shirowaku/id6776296654"
+                target="_blank"
+                rel="noreferrer"
+                aria-label="App StoreでShiroWakuをダウンロード"
+                ><img
+                  src="./images/download_apple.svg"
+                  alt="App Storeからダウンロード"
+              /></a>
+            </div>
+          </div>
+        </section>
+
+        <section id="contact" class="section contact">
+          <h2 class="section-title">ご質問・ご要望</h2>
+          <p class="section-copy">
+            ShiroWakuについてのご質問やご要望がございましたら<br />お気軽にお問い合わせください。
+          </p>
+          <div class="contact-actions">
+            <a class="btn btn-sub" href="mailto:nomari.mail@gmail.com"
+              >メールで問い合わせ</a
+            >
+            <a
+              class="btn btn-sub"
+              href="https://x.com/nomari_me"
+              target="_blank"
+              rel="noreferrer"
+              >Xで問い合わせ</a
+            >
+          </div>
+        </section>
+      </main>
+
+      <footer>
+        <p>&copy; 2026 ShiroWaku. All rights reserved.</p>
+      </footer>
+    </div>
+    <div
+      class="image-modal"
+      role="dialog"
+      aria-modal="true"
+      aria-label="ShiroWakuのプレビュー画像"
+      data-image-modal
+    >
+      <button
+        class="image-modal-close"
+        type="button"
+        aria-label="閉じる"
+        data-image-close
       >
-        MarginCamについてのご質問やご要望がございましたら、お気軽にお問い合わせください。
-      </p>
-      <div style="margin-top: 40px">
-        <a href="mailto:nomari.mail@gmail.com" class="btn"
-          >メールで問い合わせ</a
-        >
-      </div>
-    </section>
+        ×
+      </button>
+      <img src="./images/image.png" alt="ShiroWakuのプレビュー画像" />
+    </div>
+    <script>
+      const modal = document.querySelector("[data-image-modal]");
+      const openButton = document.querySelector("[data-image-open]");
+      const closeButton = document.querySelector("[data-image-close]");
+      const desktopMediaQuery = window.matchMedia("(min-width: 761px)");
 
-    <!-- フッター -->
-    <footer>
-      <p>&copy; 2026 ShiroWaku. All rights reserved.</p>
-      <p style="font-size: 0.9rem; opacity: 0.7">iOS専用アプリ</p>
-      <div class="footer-links">
-        <a href="#features">機能</a>
-        <a href="#about">アプリについて</a>
-        <a href="mailto:nomari.mail@gmail.com">お問い合わせ</a>
-      </div>
-    </footer>
+      /**
+       * 拡大画像モーダルの表示
+       */
+      const openModal = () => {
+        if (!desktopMediaQuery.matches) return;
+        modal.classList.add("is-open");
+        closeButton.focus();
+      };
+
+      /**
+       * 拡大画像モーダルの非表示
+       */
+      const closeModal = () => {
+        modal.classList.remove("is-open");
+        openButton.focus();
+      };
+
+      /**
+       * 背景クリック時のモーダル終了判定
+       *
+       * @param {MouseEvent} event クリックイベント
+       */
+      const handleBackdropClick = (event) => {
+        if (event.target === modal) closeModal();
+      };
+
+      /**
+       * Escapeキー押下時のモーダル終了判定
+       *
+       * @param {KeyboardEvent} event キーボードイベント
+       */
+      const handleEscapeKey = (event) => {
+        if (event.key === "Escape" && modal.classList.contains("is-open")) {
+          closeModal();
+        }
+      };
+
+      openButton.addEventListener("click", openModal);
+      closeButton.addEventListener("click", closeModal);
+      modal.addEventListener("click", handleBackdropClick);
+      document.addEventListener("keydown", handleEscapeKey);
+    </script>
   </body>
 </html>
